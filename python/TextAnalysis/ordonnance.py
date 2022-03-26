@@ -14,3 +14,11 @@ class Ordonance:
 
     def setPatient(self, patient):
         self.patient = patient
+
+    def getMedicaments(self):
+        return self.medicaments
+
+    def getMedIndex(self, name):
+        for i in range(len(self.medicaments)):
+            if self.medicaments[i].name == name:
+                return i
