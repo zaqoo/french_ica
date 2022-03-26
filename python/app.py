@@ -13,6 +13,7 @@ from time import sleep
 from blob import *
 from analyse import *
 from conf import *
+from transcript import *
 
 app = Flask(__name__)
 
