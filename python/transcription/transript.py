@@ -9,20 +9,27 @@ sys.path.insert(0, '../TextAnalysis')
 from conf import *
 from blob import *
 from analyse import *
+from translate import *
 
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, language="fr-FR")
 
-res = ""
+res = []
+tmp = ""
 
 def signal_handler(sig, frame):
     global res
+    global tmp
+    #res.append(tmp)
     print("Cancelling program")
     speech_recognizer.stop_continuous_recognition()
-    print("result res: " + res)
-    print("replacing")
-    res = process_input(res)
+    print("result res: ")
     print(res)
-    analyse_input(res)
+    #print("replacing")
+    #res = process_input(res)
+    #print(res)
+    str = translateText(' '.join(res))
+    print('Translated : ' + str)
+    analyse_input([str])
     exit()
     
 
@@ -30,10 +37,16 @@ signal.signal(signal.SIGINT, signal_handler)
 
 def onRecognizing(e):
     print(e.result.text)
+    global tmp
+    tmp = e.result.text
+
+def onReconnected(e):
     global res
-    res = e.result.text
+    print("RECOOOOO")
+    res.append(e.result.text)
 
 speech_recognizer.recognizing.connect(onRecognizing)
+speech_recognizer.recognized.connect(onReconnected)
 #speech_recognizer.canceled.connect(onCancel)
 result = speech_recognizer.start_continuous_recognition()
 print("Begin Transcription !")
