@@ -1,12 +1,14 @@
 import csv
+import pathlib
+import os
 
 def read_dictionary(file_name):
-    f = open("/home/theos/french_ica/python/interpret-blob/dictionary/" + file_name)
+    f = open(os.path.realpath("..") + "/interpret-blob/dictionary/" + file_name)
     dico = f.read().split('\n')
     return dico
 
 def read_profane_to_common(file_name):
-    f = open("/home/theos/french_ica/python/interpret-blob/dictionary/" + file_name)
+    f = open(os.path.realpath("..") + "/interpret-blob/dictionary/" + file_name)
     tmp = f.read().split('\n')
 
     dico = {}
@@ -21,3 +23,7 @@ def pro_to_com(str, dico):
         print(key)
         str = str.replace(s, dico[key], 1)
     return str
+
+def process_input(input):
+    pro = read_profane_to_common("test.txt")
+    return pro_to_com(input, pro)
