@@ -65,5 +65,5 @@ def process_endpoint():
     #print(res)
     str = translateText(' '.join(res))
     print('Translated : ' + str)
-    analyse_input([str])
-    exit()
+    return(analyse_input([str]))
+    
