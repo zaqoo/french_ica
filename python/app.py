@@ -1,6 +1,6 @@
 from flask import Flask
 from time import sleep
-from flask_cors import CORS
+from flask_cors import *
 
 
 import azure.cognitiveservices.speech as speechsdk
@@ -31,18 +31,26 @@ def onReconnected(e):
     global res
     res.append(e.result.text)
 
+@app.route('/hello')
+def hello():
+    return 'Hello Word!'
+
+
 @app.route('/start')
+@cross_origin()
 def super_endpoint():
     speech_recognizer.recognized.connect(onReconnected)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
     print("Begin Transcription !")
     while True:
-        sleep(0.5)                                                                                                                                                                                 
+        sleep(0.5)
+                                                                                                                                                                          
     
 
 
 @app.route('/end')
+@cross_origin()
 def process_endpoint():
     global res
     global tmp
