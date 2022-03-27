@@ -3,7 +3,6 @@ import './App.css';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-
 /* This example requires Tailwind CSS v2.0+ */
 import { PaperClipIcon } from '@heroicons/react/solid'
 
@@ -87,7 +86,7 @@ function Example(props) {
     {MedicamentToTable(props.ordonnance.medicaments)}
   </div>
   <div>
-  <button onClick={RenderPDF} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Valider</button>
+  <a className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" href="ordonnance.pdf" rel="noopener noreffer" target="_blank">Valider</a>
   </div>
 </form>
   )
@@ -136,17 +135,17 @@ function returnSpinningRing()
 
 function App(props) {
   return (
-    <div className='flex list-item'>
+    <div className='flex list-item mx-auto container'>
     <div className="App p-6 items-center justify-center">
-        <h1 className="text-blue-400 font-extrabold">French ICA</h1>
-        <p className="tracking-widest">L'IA au service de la relation médecin/patient</p>
+        <h1 className="text-blue-400 font-extrabold text-5xl mb-2">French ICA</h1>
+        <p className="tracking-widest text-2xl mb-5">L'IA au service de la relation médecin/patient</p>
     </div>
-    <div className='flex row items-center justify-around'>
+    <div className='flex row items-center justify-around mb-10'>
     <button onClick={StartRecording} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 		{
       props.startSpinning ? (returnSpinningRing()) : (<></>)
     }
-    Demarrer l'enregistrement
+    🎙️ Demarrer l'enregistrement
     </button>
     <button onClick={StopRecording} className="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center">
 		{
@@ -164,14 +163,10 @@ function App(props) {
 
 function RenderPDF()
 {
-  ReactDOM.render(
-    <React.StrictMode>
-      <GeneratePDF
+  return (<></>)
+  return (<GeneratePDF
       medicaments={myOrdonnance.medicaments}
-      />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
+      />  );
 }
 
 function GeneratePDF(props)
@@ -198,8 +193,8 @@ function GeneratePDF(props)
             <p> - {medoc.name} {medoc.dose} {medoc.frequency}</p>
           ))
         }
-      </article>
 
+      </article>
       <article id="whiteP">
         <h2>Second article</h2>
 
