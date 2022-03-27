@@ -18,7 +18,8 @@ var myOrdonnance = {
   medicaments: [],
   patient: {
     name: ""
-  }
+  },
+  examinations: []
 };
 
 var fakeOrdonnance = {
@@ -88,6 +89,37 @@ function MedicamentToTable(medicaments)
   )
 }
 
+function ExaminationToTable(examinations)
+{
+  return (
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                    Examen
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    <span className="sr-only">Edit</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {examinations.map((medoc, index) => (
+              <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                    {medoc.name}
+                </th>
+                <td className="px-6 py-4 text-right">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+             ))} 
+        </tbody>
+      </table>
+    </div>
+  )
+}
 function Example(props) {
   return (
     <form>
@@ -103,6 +135,8 @@ function Example(props) {
     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prescription</label>
     {MedicamentToTable(props.ordonnance.medicaments)}
   </div>
+  
+  
   <div>
   <button onClick={RenderPDF} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Valider</button>
   </div>
@@ -154,26 +188,27 @@ async function requestTranscript()
 async function StopRecording()
 {
   request = false
-  ReactDOM.render(
+  /*ReactDOM.render(
   <App ordonnance = {myOrdonnance}
   startSpinning = {false}
   stopSpinning = {true}
   transcripted = {transcriptedGlobalText}
   />, document.getElementById('root'));
- /* axios.get("http://localhost:5000/end")
+  */
+  axios.get("http://localhost:5000/end")
   .then(function(response){
     console.log(response);
-    const ord = fakeOrdonnance;
      const ord = response.data; 
     ReactDOM.render(
       <App ordonnance = {ord}
       startSpinning = {false}
       stopSpinning = {false}
+      transcripted = {transcriptedGlobalText}
       />, document.getElementById('root'));
       myOrdonnance = ord;
   }
   )
-  */
+  /*
   const ord = fakeOrdonnance;
   ReactDOM.render(
    <App ordonnance = {ord}
@@ -182,6 +217,7 @@ async function StopRecording()
    transcripted = {transcriptedGlobalText}
    />, document.getElementById('root'));
    myOrdonnance = ord;
+   */
 
 }
 
