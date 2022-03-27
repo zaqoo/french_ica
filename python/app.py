@@ -5,7 +5,6 @@ import azure.cognitiveservices.speech as speechsdk
 import sys
 import signal
 sys.path.insert(0, './')
-sys.path.insert(0, './')
 sys.path.insert(0, './transcription')
 sys.path.insert(0, './interpret-blob')
 sys.path.insert(0, './TextAnalysis')
@@ -13,7 +12,7 @@ from time import sleep
 from blob import *
 from analyse import *
 from conf import *
-from transcript import *
+from transript import *
 
 app = Flask(__name__)
 
@@ -24,6 +23,7 @@ def super_endpoint():
     speech_recognizer.recognizing.connect(onRecognizing)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
+    print("suce")
     print("Begin Transcription !")
     while True:
         sleep(0.5)
