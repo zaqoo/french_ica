@@ -24,6 +24,11 @@ res = []
 tmp = ""
 
 
+def onReconnected(e):
+    global res
+    print(res)
+    res.append(e.result.text)
+
 @app.route('/')
 def super_endpoint():
     speech_recognizer.recognizing.connect(onRecognizing)
