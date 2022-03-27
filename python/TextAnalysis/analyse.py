@@ -126,12 +126,9 @@ def extract_medication(client, documents):
             elif (entity.category == "ExaminationName"):
                 exam = Examination(entity.text)
                 ordonnance.addMedicament(exam)
-                    
-                    
-        
 
-                
-                
+
+
         print("------------------------------------------")
         
         print("ORDONANCE EXTRACTED")
@@ -152,5 +149,5 @@ def pii_recognition_example(client, documents):
 
 def analyse_input(str):
     entity_recognition_example(client, str)
-    #extract_medication(client, str)
+    extract_medication(client, str)
     pii_recognition_example(client, str)
