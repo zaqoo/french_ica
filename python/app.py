@@ -23,7 +23,6 @@ def super_endpoint():
     speech_recognizer.recognizing.connect(onRecognizing)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
-    print("suce")
     print("Begin Transcription !")
     while True:
         sleep(0.5)
@@ -36,7 +35,7 @@ def process_endpoint():
     speech_recognizer.stop_continuous_recognition()
     print("result res: " + res)
     print("replacing")
-    res = process_input(res)
+    res = translateText(' '.join(res))
     print(res)
-    analyse_input(res)
+    analyse_input([res])
     exit()
