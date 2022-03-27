@@ -13,6 +13,7 @@ from blob import *
 from analyse import *
 from conf import *
 from transript import *
+from translate import *
 
 app = Flask(__name__)
 
