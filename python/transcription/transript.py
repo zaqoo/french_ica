@@ -20,7 +20,6 @@ def signal_handler(sig, frame):
     speech_recognizer.stop_continuous_recognition()
     print("result res: " + res)
     print("replacing")
-    res = process_input(res)
     print(res)
     analyse_input(res)
     exit()
