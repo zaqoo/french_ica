@@ -44,8 +44,7 @@ def super_endpoint():
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
     print("Begin Transcription !")
-    while True:
-        sleep(0.5)
+    return 'success'
                                                                                                                                                                           
     
 
