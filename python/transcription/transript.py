@@ -12,7 +12,7 @@ from analyse import *
 
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, language="fr-FR")
 
-res = ""
+res = []
 
 def signal_handler(sig, frame):
     global res
@@ -31,6 +31,11 @@ def onRecognizing(e):
     print(e.result.text)
     global res
     res = e.result.text
+
+def onRecognized(e):
+    global res
+    res.append(e.result.text)
+
 
 '''speech_recognizer.recognizing.connect(onRecognizing)
 #speech_recognizer.canceled.connect(onCancel)

@@ -21,7 +21,7 @@ speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, lang
 
 @app.route('/')
 def super_endpoint():
-    speech_recognizer.recognizing.connect(onRecognizing)
+    speech_recognizer.recognized.connect(onRecognized)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
     print("Begin Transcription !")
@@ -34,8 +34,8 @@ def process_endpoint():
     global res
     print("Cancelling program")
     speech_recognizer.stop_continuous_recognition()
-    print("result res: " + res)
-    print("replacing")
+    print("result res: ")
+    print(res)
     res = translateText(' '.join(res))
     print(res)
     analyse_input([res])
