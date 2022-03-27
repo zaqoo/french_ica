@@ -11,7 +11,7 @@ from conf import *
 from ordonnance import *
 from medicament import *
 from examination import *
-
+from patient import *
 key = "653aadbe72bd4d8da93f7bf1b7cea508"
 endpoint = "https://entityanalysisica.cognitiveservices.azure.com/"
 
@@ -24,9 +24,11 @@ def authenticate_client():
     return text_analytics_client
 
 client = authenticate_client()
+patient_name = ""
 
 # Example function for recognizing entities from text
 def entity_recognition_example(client, documents):
+    global patient_name
 
     try:
         result = client.recognize_entities(documents = documents)[0]
@@ -35,6 +37,8 @@ def entity_recognition_example(client, documents):
         for entity in result.entities:
             print("\tText: \t", entity.text, "\tCategory: \t", entity.category, "\tSubCategory: \t", entity.subcategory,
                     "\n\tConfidence Score: \t", round(entity.confidence_score, 2), "\tLength: \t", entity.length, "\tOffset: \t", entity.offset, "\n")
+            if (entity.category == "Person"):
+                patient_name = entity.text
 
     except Exception as err:
         print("Encountered exception. {}".format(err))
@@ -89,8 +93,8 @@ def extract_medication(client, documents):
     docs = [doc for doc in result if not doc.is_error]
     print("docs :")
     print(docs)
-    ordonnance = Ordonance()
-        
+    patient = Patient(patient_name)
+    ordonnance = Ordonance(patient)        
     for idx, doc in enumerate(docs):
         for relation in doc.entity_relations:
             print("Relation of type: {} has the following roles".format(relation.relation_type))

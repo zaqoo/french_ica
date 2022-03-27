@@ -4,6 +4,7 @@ class Ordonance:
     def __init__(self, patient = None):
         self.medicaments = []
         self.patient = patient
+        self.prescripteur = "Guillaume CUNY"
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
