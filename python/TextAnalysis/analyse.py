@@ -95,6 +95,7 @@ def extract_medication(client, documents):
     print(docs)
     patient = Patient(patient_name)
     ordonnance = Ordonance(patient)        
+    ordoAnalyse = Ordonance(patient)
     for idx, doc in enumerate(docs):
         for relation in doc.entity_relations:
             print("Relation of type: {} has the following roles".format(relation.relation_type))
@@ -129,14 +130,14 @@ def extract_medication(client, documents):
                     ordonnance.getMedicaments()[index].setDosage(entity.text)
             elif (entity.category == "ExaminationName"):
                 exam = Examination(entity.text)
-                ordonnance.addMedicament(exam)
+                ordoAnalyse.addMedicament(exam)
 
 
 
         print("------------------------------------------")
         
         print("ORDONANCE EXTRACTED")
-        return (ordonnance.toJSON())
+        return (JSON.dumps([ordonnance.toJSON(), ordoAnalyse.toJSON()]))
 
 def pii_recognition_example(client, documents):
     response = client.recognize_pii_entities(documents)
