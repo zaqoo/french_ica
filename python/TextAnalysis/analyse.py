@@ -132,7 +132,7 @@ def extract_medication(client, documents):
         print("------------------------------------------")
         
         print("ORDONANCE EXTRACTED")
-        print(ordonnance.toJSON())
+        return (ordonnance.toJSON())
 
 def pii_recognition_example(client, documents):
     response = client.recognize_pii_entities(documents)
@@ -149,5 +149,4 @@ def pii_recognition_example(client, documents):
 
 def analyse_input(str):
     entity_recognition_example(client, str)
-    extract_medication(client, str)
-    pii_recognition_example(client, str)
+    return(extract_medication(client, str))
