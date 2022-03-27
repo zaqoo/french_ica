@@ -11,12 +11,12 @@ from blob import *
 from analyse import *
 from translate import *
 
-speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, language="fr-FR")
+#speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, language="fr-FR")
 
-res = []
-tmp = ""
+#res = []
+#tmp = ""
 
-def signal_handler(sig, frame):
+'''def signal_handler(sig, frame):
     global res
     global tmp
     #res.append(tmp)
@@ -30,10 +30,8 @@ def signal_handler(sig, frame):
     str = translateText(' '.join(res))
     print('Translated : ' + str)
     analyse_input([str])
-    exit()
+    exit()'''
     
-
-signal.signal(signal.SIGINT, signal_handler)
 
 def onRecognizing(e):
     print(e.result.text)
@@ -45,10 +43,10 @@ def onReconnected(e):
     print("RECOOOOO")
     res.append(e.result.text)
 
-speech_recognizer.recognizing.connect(onRecognizing)
+'''speech_recognizer.recognizing.connect(onRecognizing)
 speech_recognizer.recognized.connect(onReconnected)
 #speech_recognizer.canceled.connect(onCancel)
 result = speech_recognizer.start_continuous_recognition()
 print("Begin Transcription !")
 while True:
-    sleep(0.5)
+    sleep(0.5)'''

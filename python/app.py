@@ -16,26 +16,39 @@ from transript import *
 
 app = Flask(__name__)
 
+print("Starting...")
+
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, language="fr-FR")
+
+res = []
+tmp = ""
+
 
 @app.route('/')
 def super_endpoint():
     speech_recognizer.recognizing.connect(onRecognizing)
+    speech_recognizer.recognized.connect(onReconnected)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
     print("Begin Transcription !")
     while True:
-        sleep(0.5)
+        sleep(0.5)                                                                                                                                                                                 
+    
 
 
 @app.route('/end')
 def process_endpoint():
     global res
+    global tmp
+    #res.append(tmp)
     print("Cancelling program")
     speech_recognizer.stop_continuous_recognition()
-    print("result res: " + res)
-    print("replacing")
-    res = translateText(' '.join(res))
+    print("result res: ")
     print(res)
-    analyse_input([res])
+    #print("replacing")
+    #res = process_input(res)
+    #print(res)
+    str = translateText(' '.join(res))
+    print('Translated : ' + str)
+    analyse_input([str])
     exit()
