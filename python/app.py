@@ -31,7 +31,6 @@ def onReconnected(e):
 
 @app.route('/')
 def super_endpoint():
-    speech_recognizer.recognizing.connect(onRecognizing)
     speech_recognizer.recognized.connect(onReconnected)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
