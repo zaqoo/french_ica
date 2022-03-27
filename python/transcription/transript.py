@@ -18,7 +18,6 @@ def signal_handler(sig, frame):
     global res
     print("Cancelling program")
     speech_recognizer.stop_continuous_recognition()
-    print("result res: " + res)
     print("replacing")
     print(res)
     analyse_input(res)
