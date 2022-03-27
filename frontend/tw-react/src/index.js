@@ -17,6 +17,7 @@ ReactDOM.render(
     <App ordonnance = {myOrdonnance}
     startSpinning = {false}
     stopSpinning = {false}
+    transcripted = {""}
     />
   </React.StrictMode>,
   document.getElementById('root')

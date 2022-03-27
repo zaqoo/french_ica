@@ -24,13 +24,7 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
+ "browserslist": {
     "production": [
       ">0.2%",
       "not dead",

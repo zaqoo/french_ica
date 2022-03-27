@@ -26,6 +26,9 @@ speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, lang
 res = []
 tmp = ""
 
+def onReconizing(e):
+    global tmp
+    tmp = e.result.text
 
 def onReconnected(e):
     global res
@@ -41,13 +44,17 @@ def hello():
 @app.route('/start')
 @cross_origin()
 def super_endpoint():
+    speech_recognizer.recognizing.connect(onReconizing)
     speech_recognizer.recognized.connect(onReconnected)
     #speech_recognizer.canceled.connect(onCancel)
     result = speech_recognizer.start_continuous_recognition()
     print("Begin Transcription !")
     return 'success'
                                                                                                                                                                           
-    
+@app.route('/transcript')
+@cross_origin()
+def transcript():
+    return tmp
 
 
 @app.route('/end')
