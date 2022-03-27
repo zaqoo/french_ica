@@ -33,14 +33,9 @@ from translate import *
     exit()'''
     
 
-def onRecognizing(e):
-    print(e.result.text)
-    global tmp
-    tmp = e.result.text
-
 def onReconnected(e):
     global res
-    print("RECOOOOO")
+    print(res)
     res.append(e.result.text)
 
 '''speech_recognizer.recognizing.connect(onRecognizing)
