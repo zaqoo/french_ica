@@ -32,6 +32,7 @@ def onReconnected(e):
     res.append(e.result.text)
 
 @app.route('/hello')
+@cross_origin()
 def hello():
     return 'Hello Word!'
 
