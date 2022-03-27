@@ -26,10 +26,9 @@ tmp = ""
 
 def onReconnected(e):
     global res
-    print(res)
     res.append(e.result.text)
 
-@app.route('/')
+@app.route('/start')
 def super_endpoint():
     speech_recognizer.recognized.connect(onReconnected)
     #speech_recognizer.canceled.connect(onCancel)
@@ -41,6 +40,7 @@ def super_endpoint():
 
 
 @app.route('/end')
+@cross_origin()
 def process_endpoint():
     global res
     global tmp
