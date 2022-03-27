@@ -1,5 +1,7 @@
 from flask import Flask
 from time import sleep
+from flask_cors import CORS
+
 
 import azure.cognitiveservices.speech as speechsdk
 import sys
@@ -15,6 +17,7 @@ from conf import *
 from transript import *
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 print("Starting...")
 
@@ -40,7 +43,6 @@ def super_endpoint():
 
 
 @app.route('/end')
-@cross_origin()
 def process_endpoint():
     global res
     global tmp
